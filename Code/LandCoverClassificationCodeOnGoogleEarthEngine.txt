@@ -1,0 +1,61 @@
+# link: https://code.earthengine.google.com/3dc87205abe88478f92f078b2ca953d1
+
+var table : Table projects/ee-amanjain4269/as...
+var imageVisParam: SR_B4, SR_B3 and SR_B2 fr...
+var mountains: FeatureCollection (48 elements)
+var coalMines: FeatureCollection(47 elements)
+var Vegetation: FeatureCollection(53 elements)
+type: FeatureCollection
+columns: Object (2 properties)
+Class: Integer
+system:index: String
+features: List (53 elements)
+Map.addLayer(table);
+Map.centerObject(table,10)
+var L8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
+
+var image = L8.filterBounds(table)
+              .filterDate('2021-01-01', '2021-12-31')
+              .filterMetadata('CLOUD_COVER', 'less_than', 1)
+              .median()
+              .clip(table)
+Map.addLayer(image, imageVisParam)
+
+var sample = mountains.merge(coalMines).merge(Vegetation)
+
+print(sample)
+
+var bands = ['SR_B1', 'SR_B2', 'SR_B3', 'SR_B4', 'SR_B5', 'SR_B6', 'SR_B7']
+
+var trainImage = image.select(bands).sampleRegions({
+    collection: sample,
+    properties: ['Class'],
+    scale: 30, 
+    tileScale: 15
+});
+
+
+print(trainImage)
+
+var classifier = ee.Classifier.smileCart().train({
+  features:trainImage, 
+  classProperty:'Class', 
+  inputProperties:bands})
+
+print(classifier.getInfo())
+
+var classified = image.select(bands).classify(classifier)
+
+Map.addLayer(classified, {min:0, max:2, palette:['blue', 'red', 'green']})
+
+var mosaic = ee.ImageCollection('your_collection')
+  .filterBounds(table)
+  .mosaic();
+
+Export.image.toDrive({
+  image: mosaic,
+  description: 'land_cover_classification',
+  scale: 30,
+  region: table.geometry(),
+  maxPixels: 300000000, 
+});
