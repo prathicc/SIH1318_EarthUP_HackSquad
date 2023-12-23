@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+
+</head>
+<body>
+    <h1>Upload Image for Prediction</h1>
+    <form action="/index5" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Predict">
+    </form>
+    
+    {% if result %}
+        <p>Prediction: {{ result.prediction }}</p>
+        <img src="{{ result.img_data_uri }}" alt="Uploaded Image">
+    {% endif %}
+</body>
+</html>
