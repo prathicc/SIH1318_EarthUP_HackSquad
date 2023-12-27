@@ -4,14 +4,14 @@ This project aims to deliver a geospatial analytic tool that can be used by gove
 
 This website contains two major products - 
 1. A Series of Web-Based Interactive Dashboards
-   a. Harnesses the potential of GLIS data to provide actionable insights and analyze demographic trends. 
-   b. Geospatial Web-based Interactive Map
-   c. Information Interactive Dashboard
-   d. Data shown with the use of various layers
+      a. Harnesses the potential of GLIS data to provide actionable insights and analyze demographic trends. 
+      b. Geospatial Web-based Interactive Map
+      c. Information Interactive Dashboard
+      d. Data shown with the use of various layers
    
 3. Decision support system/ Recommender system using Machine Learning integrated in the dashboard
-   a. Population Density Analysis 
-   b. Infrastructure Location Prediction to find the optimal location per the user's requirements. 
-   c. Land Records Digitization that reduces land disputes, streamlines transactions, ensures transparency and supports efficient land management and taxation. (Building Detection, Road Detection)
-   d. Land use types classification using Deep Learning based semantic segmentation techniques using high-resolution satellite imagery
+      a. Population Density Analysis 
+      b. Infrastructure Location Prediction to find the optimal location per the user's requirements. 
+      c. Land Records Digitization that reduces land disputes, streamlines transactions, ensures transparency and supports efficient land management and taxation. (Building Detection, Road Detection)
+      d. Land use types classification using Deep Learning based semantic segmentation techniques using high-resolution satellite imagery
 
